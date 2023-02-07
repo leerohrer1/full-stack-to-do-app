@@ -1,21 +1,20 @@
-
-<div>
-  <h3>To Do List</h3>
-  <ul>
-    <li *ngFor="let item of toDoItems">{{ item.description }}</li>
-  </ul>
-</div>
-<div>
-  <form class="to-do-list-form">
+<div class="flex-center h-full">
+  <app-header></app-header>
+  <app-to-do-list  [_toDoItems]="toDoItems"></app-to-do-list>
+  <form
+    id="to-do-list-form"
+    [formGroup]="toDoItemsForm"
+    (ngSubmit)="addToDoItem()"
+  >
     <mat-dialog-content>
       <mat-form-field appearance="outline">
         <mat-label>Add</mat-label>
-        <input matInput #newItem placeholder="Add a to do item"/>
+        <input formControlName="item" matInput placeholder="Add a to do item" />
       </mat-form-field>
     </mat-dialog-content>
     <div>
-      <mat-dialog-actions>
-        <button mat-button (click)="addToDoItem(newItem.value)">Add</button>
+      <mat-dialog-actions class="flex-center">
+        <button mat-button type="submit">Add</button>
       </mat-dialog-actions>
     </div>
   </form>

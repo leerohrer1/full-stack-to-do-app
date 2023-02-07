@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Item } from './Item';
+import { FormBuilder } from '@angular/forms';
+
 
 @Component({
   selector: 'app-root',
@@ -14,9 +16,17 @@ export class AppComponent {
     { description: 'test2', done: false }
   ];
 
-  addToDoItem(description: string) {
-    this.toDoItems.unshift({
-      description,
+  toDoItemsForm = this.formBuilder.group({
+    item: '',
+  });
+
+  constructor(
+    private formBuilder: FormBuilder,
+  ) {}
+
+  addToDoItem() {
+    this.toDoItems.push({
+      description: this.toDoItemsForm.value.item,
       done: false
     });
   }
