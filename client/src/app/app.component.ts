@@ -31,7 +31,7 @@ export class AppComponent {
     });
   }
 
-  deleteToDoItem(description: string) {
-    this.toDoItems = this.toDoItems.filter((item) => item.description !== description);
+  deleteFromApp(item: Item) {
+    return this.toDoItems = this.toDoItems.filter((filteredItem) => filteredItem.description !== item.description)
   }
 }

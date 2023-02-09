@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Item } from 'src/app/Item';
 
 @Component({
@@ -12,6 +12,12 @@ item: Item = {description: 'test', done: false};
 
 @Input() set _item (value: Item){
   this.item = value;
+}
+
+@Output() deleted = new EventEmitter<Item>();
+
+deleteToDoItem(item: Item): void {
+  this.deleted.emit(item);
 }
 
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Item } from 'src/app/Item';
 
 @Component({
@@ -14,4 +14,9 @@ export class ToDoListComponent {
     this.inputToDoItems = value;
   }
 
+  @Output() deleted = new EventEmitter<Item>();
+
+  deleteFromToDoList(item: Item): void {
+    this.deleted.emit(item);
+  }
 }

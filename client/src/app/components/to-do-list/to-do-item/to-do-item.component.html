@@ -1,6 +1,10 @@
+
 <div class="flex-row">
   <div>
-    <mat-checkbox [checked]="item.done"></mat-checkbox>
+    <mat-checkbox color="primary" [checked]="item.done"></mat-checkbox>
   </div>
   <div>{{item.description}}</div>
+  <button (click)="deleteToDoItem(item)">
+    <span class="material-icons">delete</span>
+  </button>
 </div>

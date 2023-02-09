@@ -1,6 +1,9 @@
 <div class="flex-center h-full">
   <app-header></app-header>
-  <app-to-do-list  [_toDoItems]="toDoItems"></app-to-do-list>
+  <app-to-do-list
+  [_toDoItems]="toDoItems"
+  (deleted)="deleteFromApp($event)"
+  ></app-to-do-list>
   <form
     id="to-do-list-form"
     [formGroup]="toDoItemsForm"
