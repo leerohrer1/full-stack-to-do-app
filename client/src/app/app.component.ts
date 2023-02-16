@@ -12,8 +12,12 @@ export class AppComponent {
   title = 'to-do-client';
 
   toDoItems: Item[] = [
-    { description: 'test1', done: true },
-    { description: 'test2', done: false }
+    { description: '1', done: true },
+    { description: '12', done: false },
+    { description: '123', done: true },
+    { description: '1234', done: false },
+    { description: '12345', done: false },
+    { description: '123456', done: false }
   ];
 
   toDoItemsForm = this.formBuilder.group({
@@ -31,7 +35,8 @@ export class AppComponent {
     });
   }
 
-  deleteFromApp(item: Item) {
-    return this.toDoItems = this.toDoItems.filter((filteredItem) => filteredItem.description !== item.description)
+  deleteFromApp(data: [Item, number]) {
+    const [item, index] = data;
+    return this.toDoItems.splice(index, 1);
   }
 }

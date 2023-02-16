@@ -14,9 +14,9 @@ export class ToDoListComponent {
     this.inputToDoItems = value;
   }
 
-  @Output() deleted = new EventEmitter<Item>();
+  @Output() deleted = new EventEmitter<[Item, number]>();
 
-  deleteFromToDoList(item: Item): void {
-    this.deleted.emit(item);
+  deleteFromToDoList(item: Item, index: number): void {
+    this.deleted.emit([item, index]);
   }
 }

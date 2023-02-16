@@ -1,6 +1,6 @@
 .flex-row {
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   gap: 10px;
   align-items: center;
   width: 300px;
@@ -12,7 +12,8 @@
   margin-top: 10px;
 }
 
-button {
-  background-color: white;
-  border: 0px;
+.flex-row-start {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
