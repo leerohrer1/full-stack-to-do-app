@@ -4,6 +4,7 @@
       <app-to-do-item
       [_item]="item"
       (deleted)="deleteFromToDoList($event, i)"
+      (edited)="editItemOnToDoList($event, i)"
       ></app-to-do-item>
     </li>
   </ul>

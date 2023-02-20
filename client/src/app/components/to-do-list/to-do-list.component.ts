@@ -16,7 +16,13 @@ export class ToDoListComponent {
 
   @Output() deleted = new EventEmitter<[Item, number]>();
 
+  @Output() edited = new EventEmitter<[Item, number]>();
+
   deleteFromToDoList(item: Item, index: number): void {
     this.deleted.emit([item, index]);
+  }
+
+  editItemOnToDoList(item: Item, index: number): void {
+    this.edited.emit([item, index]);
   }
 }

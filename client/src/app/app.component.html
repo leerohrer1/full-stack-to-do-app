@@ -3,6 +3,7 @@
   <app-to-do-list
   [_toDoItems]="toDoItems"
   (deleted)="deleteFromApp($event)"
+  (edited)="editToDoItem($event)"
   ></app-to-do-list>
   <form
     id="to-do-list-form"

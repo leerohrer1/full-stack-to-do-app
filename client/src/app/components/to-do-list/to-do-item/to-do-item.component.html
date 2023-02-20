@@ -3,7 +3,9 @@
     <mat-checkbox color="primary" [checked]="item.done"></mat-checkbox>
     <div>{{ item.description }}</div>
   </div>
-
+  <button mat-button color="accent" (click)="editToDoItem(item)">
+    <mat-icon>edit</mat-icon>
+  </button>
   <button mat-button color="accent" (click)="deleteToDoItem(item)">
     <mat-icon>delete</mat-icon>
   </button>

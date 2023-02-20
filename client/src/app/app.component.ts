@@ -35,6 +35,11 @@ export class AppComponent {
     });
   }
 
+  editToDoItem(data: [Item, number]) {
+    const [item, index] = data;
+    return this.toDoItems[index] = item;
+  }
+
   deleteFromApp(data: [Item, number]) {
     const [item, index] = data;
     return this.toDoItems.splice(index, 1);

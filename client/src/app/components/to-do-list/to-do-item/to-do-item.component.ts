@@ -16,8 +16,14 @@ item: Item = {description: 'test', done: false};
 
 @Output() deleted = new EventEmitter<Item>();
 
+@Output() edited = new EventEmitter<Item>();
+
 deleteToDoItem(item: Item): void {
   this.deleted.emit(item);
+}
+
+editToDoItem(item: Item): void {
+  this.edited.emit(item); 
 }
 
 }
