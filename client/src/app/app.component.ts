@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Item } from './Item';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 
 
 @Component({
@@ -35,9 +35,11 @@ export class AppComponent {
     });
   }
 
-  editToDoItem(data: [Item, number]) {
+  saveToDoItem(data: [Item, number]) {
     const [item, index] = data;
-    return this.toDoItems[index] = item;
+    console.log('1', this.toDoItems)
+    this.toDoItems[index] = item;
+    console.log('2',this.toDoItems)
   }
 
   deleteFromApp(data: [Item, number]) {

@@ -3,7 +3,7 @@
   <app-to-do-list
   [_toDoItems]="toDoItems"
   (deleted)="deleteFromApp($event)"
-  (edited)="editToDoItem($event)"
+  (saved)="saveToDoItem($event)"
   ></app-to-do-list>
   <form
     id="to-do-list-form"
@@ -12,8 +12,8 @@
   >
     <mat-dialog-content>
       <mat-form-field appearance="outline">
-        <mat-label>Add</mat-label>
-        <input formControlName="item" matInput placeholder="Add a to do item" />
+        <mat-label>Enter a to do item here</mat-label>
+        <input formControlName="item" matInput/>
       </mat-form-field>
     </mat-dialog-content>
     <div>

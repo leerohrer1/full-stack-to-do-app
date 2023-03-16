@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Item } from 'src/app/Item';
 
 @Component({
@@ -10,19 +11,20 @@ export class ToDoListComponent {
 
   inputToDoItems: Item[] = [];
 
-  @Input() set _toDoItems (value: Item[]) {
+  @Input() set _toDoItems(value: Item[]) {
     this.inputToDoItems = value;
   }
 
   @Output() deleted = new EventEmitter<[Item, number]>();
 
-  @Output() edited = new EventEmitter<[Item, number]>();
+  @Output() saved = new EventEmitter<[Item, number]>();
+
 
   deleteFromToDoList(item: Item, index: number): void {
     this.deleted.emit([item, index]);
   }
 
-  editItemOnToDoList(item: Item, index: number): void {
-    this.edited.emit([item, index]);
+  saveItemOnToDoList(item: Item, index: number): void {
+    this.saved.emit([item, index]);
   }
 }

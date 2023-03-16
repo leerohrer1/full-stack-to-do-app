@@ -1,12 +1,30 @@
-<div class="flex-row">
-  <div class="flex-row-start">
-    <mat-checkbox color="primary" [checked]="item.done"></mat-checkbox>
-    <div>{{ item.description }}</div>
+<form
+[formGroup]="itemFormGroup"
+(submit)="saveToDoItem(itemFormGroup.value)"
+>
+  <div class="flex-row">
+    <div class="flex-row-start">
+      <mat-checkbox
+      color="primary"
+      [checked]="item.done"
+      formControlName="doneControl"
+      ></mat-checkbox>
+
+      <mat-form-field>
+        <input
+          type="text"
+          formControlName="descriptionControl"
+          matInput
+          value="{{ item.description }}"
+        />
+      </mat-form-field>
+    </div>
+
+    <button mat-button color="accent" type="submit">
+      <mat-icon>save</mat-icon>
+    </button>
+    <button mat-button color="accent" (click)="deleteToDoItem()">
+      <mat-icon>delete</mat-icon>
+    </button>
   </div>
-  <button mat-button color="accent" (click)="editToDoItem(item)">
-    <mat-icon>edit</mat-icon>
-  </button>
-  <button mat-button color="accent" (click)="deleteToDoItem(item)">
-    <mat-icon>delete</mat-icon>
-  </button>
-</div>
+</form>
