@@ -1,13 +1,10 @@
-<form
-[formGroup]="itemFormGroup"
-(submit)="saveToDoItem(itemFormGroup.value)"
->
+<form [formGroup]="itemFormGroup" (submit)="saveToDoItem(itemFormGroup.value)">
   <div class="flex-row">
     <div class="flex-row-start">
       <mat-checkbox
-      color="primary"
-      [checked]="item.done"
-      formControlName="doneControl"
+        color="primary"
+        [checked]="item.done"
+        formControlName="doneControl"
       ></mat-checkbox>
 
       <mat-form-field>
@@ -23,7 +20,7 @@
     <button mat-button color="accent" type="submit">
       <mat-icon>save</mat-icon>
     </button>
-    <button mat-button color="accent" (click)="deleteToDoItem()">
+    <button mat-button color="accent" type="button" (click)="deleteToDoItem()">
       <mat-icon>delete</mat-icon>
     </button>
   </div>

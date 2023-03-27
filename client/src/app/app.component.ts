@@ -1,51 +1,60 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Item } from './Item';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'to-do-client';
 
-  toDoItems: Item[] = [
-    { description: '1', done: true },
-    { description: '12', done: false },
-    { description: '123', done: true },
-    { description: '1234', done: false },
-    { description: '12345', done: false },
-    { description: '123456', done: false }
-  ];
+  toDoItems: Item[] = [];
 
   toDoItemsForm = this.formBuilder.group({
     item: '',
   });
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private http: HttpClient
-  ) {}
+  constructor(private formBuilder: FormBuilder, private http: HttpClient) {}
 
-  addToDoItem() {
-    this.toDoItems.push({
-      description: this.toDoItemsForm.value.item,
-      done: false
+  ngOnInit(): void {
+    this.http.get('http://localhost:1234/list').subscribe((response: any) => {
+      this.toDoItems = response;
     });
   }
 
+  addToDoItem() {
+    this.http
+      .post('http://localhost:1234/add', {
+        description: this.toDoItemsForm.value.item,
+        done: false,
+      })
+      .subscribe((response) => {
+        this.toDoItems.push({
+          description: this.toDoItemsForm.value.item,
+          done: false,
+        });
+        console.log('add', response);
+      });
+  }
+
   saveToDoItem(data: [Item, number]) {
-    const [item, index] = data;
-    this.toDoItems[index] = item;
-    console.log(item);
-    this.http.post('http://localhost:1234/add', item).subscribe(console.log)
+    this.http
+      .put('http://localhost:1234/edit', data)
+      .subscribe((response: any) => {
+        this.toDoItems = response;
+        console.log('save', response);
+      });
   }
 
   deleteFromApp(data: [Item, number]) {
-    const [item, index] = data;
-    return this.toDoItems.splice(index, 1);
+    this.http
+      .delete('http://localhost:1234/delete', { body: data })
+      .subscribe((response: any) => {
+        this.toDoItems = response;
+        console.log('delete', response);
+      });
   }
 }
