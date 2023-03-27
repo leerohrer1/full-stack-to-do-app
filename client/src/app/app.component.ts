@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Item } from './Item';
 import { FormBuilder, FormControl } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class AppComponent {
 
   constructor(
     private formBuilder: FormBuilder,
+    private http: HttpClient
   ) {}
 
   addToDoItem() {
@@ -37,9 +39,9 @@ export class AppComponent {
 
   saveToDoItem(data: [Item, number]) {
     const [item, index] = data;
-    console.log('1', this.toDoItems)
     this.toDoItems[index] = item;
-    console.log('2',this.toDoItems)
+    console.log(item);
+    this.http.post('http://localhost:1234/add', item).subscribe(console.log)
   }
 
   deleteFromApp(data: [Item, number]) {

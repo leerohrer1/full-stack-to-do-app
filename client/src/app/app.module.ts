@@ -15,7 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToDoListComponent } from './components/to-do-list/to-do-list.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ToDoItemComponent } from './components/to-do-list/to-do-item/to-do-item.component';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +35,8 @@ import { ToDoItemComponent } from './components/to-do-list/to-do-item/to-do-item
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
-  ],
+    HttpClientModule
+    ],
   providers: [],
   bootstrap: [AppComponent],
 })

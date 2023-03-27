@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Item } from 'src/app/Item';
-
 @Component({
   selector: 'app-to-do-list',
   templateUrl: './to-do-list.component.html',
