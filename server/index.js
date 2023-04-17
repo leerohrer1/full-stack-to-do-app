@@ -2,6 +2,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const mysql = require('mysql');
+const config = require('dotenv').config();
 
 // Create the express app
 const app = express();
@@ -10,39 +12,56 @@ app.use(cors());
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
-const fakeDB = [
-  { description: '1', done: true },
-  { description: '12', done: false },
-  { description: '123', done: true },
-  { description: '1234', done: false },
-  { description: '12345', done: false },
-  { description: '123456', done: false },
-];
+// Connect to DB
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: process.env.DB_PASS,
+  database: 'todoapp',
+});
+
+db.connect((err) => {
+  if (err) {
+    throw err;
+  }
+  console.log('Connected to database');
+});
 
 // Routes and middleware
 app.get('/list', (req, res) => {
-  res.json(fakeDB);
+  const sql = 'SELECT * FROM todoapp.todoitems';
+  db.query(sql, (err, data) => {
+    if (err) {
+      throw err;
+    }
+    res.json(data);
+  });
 });
 
 app.post('/add', (req, res) => {
   const listItem = req.body;
-  fakeDB.push(listItem);
-
-  res.json(fakeDB);
+  listItem.done = false ? 0 : 1;
+  const sql = `INSERT INTO todoapp.todoitems (description, done) VALUES ('${listItem.description}', '${listItem.done}')`;
+  db.query(sql, (err, data) => {
+    if (err) {
+      throw err;
+    }
+    res.json(data);
+  });
 });
 
 app.put('/edit', (req, res) => {
   const [item, index] = req.body;
-  fakeDB[index] = item;
+  data[index] = item;
 
-  res.json(fakeDB);
+  res.json(data);
 });
 
 app.delete('/delete', (req, res) => {
   const [item, index] = req.body;
-  fakeDB.splice(index, 1);
-  
-  res.json(fakeDB);
+  data.splice(index, 1);
+
+  res.json(data);
 });
 
 // Error handlers

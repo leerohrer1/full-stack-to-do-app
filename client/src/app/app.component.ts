@@ -32,11 +32,16 @@ export class AppComponent implements OnInit {
         done: false,
       })
       .subscribe((response) => {
-        this.toDoItems.push({
-          description: this.toDoItemsForm.value.item,
-          done: false,
-        });
-        console.log('add', response);
+        if (response) {
+          this.toDoItems.push({
+            description: this.toDoItemsForm.value.item,
+            done: false,
+          });
+          console.log('add', response);
+        } else {
+          //alert? snack bar? dialog?
+          console.log('error');
+        }
       });
   }
 
