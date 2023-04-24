@@ -51,14 +51,18 @@ app.post('/add', (req, res) => {
 });
 
 app.put('/edit', (req, res) => {
-  const [item, index] = req.body;
-  data[index] = item;
-
-  res.json(data);
+  const item = req.body;
+  const sql = 'UPDATE todoapp.todoitems SET description = ?, done = ? WHERE id = ?';
+  db.query(sql, [item.description, item.done, item.id], (err, data) => {
+    if(err) {
+      throw err;
+    } 
+    res.json(data);
+  })
 });
 
 app.delete('/delete', (req, res) => {
-  const [item, index] = req.body;
+  const item = req.body;
   data.splice(index, 1);
 
   res.json(data);

@@ -1,10 +1,10 @@
 <div>
   <ul>
-    <li *ngFor="let item of inputToDoItems; index as i">
+    <li *ngFor="let item of inputToDoItems">
       <app-to-do-item
       [_item]="item"
-      (deleted)="deleteFromToDoList($event, i)"
-      (saved)="saveItemOnToDoList($event, i)"
+      (deleted)="deleteFromToDoList($event)"
+      (saved)="saveItemOnToDoList($event)"
       ></app-to-do-item>
     </li>
   </ul>

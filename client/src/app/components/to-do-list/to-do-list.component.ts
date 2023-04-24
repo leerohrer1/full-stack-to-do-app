@@ -14,16 +14,16 @@ export class ToDoListComponent {
     this.inputToDoItems = value;
   }
 
-  @Output() deleted = new EventEmitter<[Item, number]>();
+  @Output() deleted = new EventEmitter<Item>();
 
-  @Output() saved = new EventEmitter<[Item, number]>();
+  @Output() saved = new EventEmitter<Item>();
 
 
-  deleteFromToDoList(item: Item, index: number): void {
-    this.deleted.emit([item, index]);
+  deleteFromToDoList(item: Item): void {
+    this.deleted.emit(item);
   }
 
-  saveItemOnToDoList(item: Item, index: number): void {
-    this.saved.emit([item, index]);
+  saveItemOnToDoList(item: Item): void {
+    this.saved.emit(item);
   }
 }

@@ -8,7 +8,7 @@ import { Item } from 'src/app/Item';
   styleUrls: ['./to-do-item.component.css'],
 })
 export class ToDoItemComponent implements OnInit {
-  item: Item = { description: 'initializer', done: false };
+  item: Item = { description: 'initializer', done: false, id: 0 };
   itemFormGroup: FormGroup = {} as FormGroup;
 
   @Input() set _item(value: Item) {
