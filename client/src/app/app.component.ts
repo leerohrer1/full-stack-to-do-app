@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.get('http://localhost:1234/list').subscribe((response: any) => {
-      console.log(response)
+      console.log(response);
       this.toDoItems = response;
     });
   }
@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
           this.toDoItems.push({
             description: this.toDoItemsForm.value.item,
             done: false,
-            id: response.id
+            id: response.id,
           });
           console.log('add', response);
         } else {
@@ -48,20 +48,22 @@ export class AppComponent implements OnInit {
   }
 
   saveToDoItem(data: Item) {
-    this.http
-      .put('http://localhost:1234/edit', data)
-      .subscribe(() => {
-        this.toDoItems.map(item => item.id === data.id ? data : item);
-        console.log('save', this.toDoItems);
-      });
+    this.http.put('http://localhost:1234/edit', data).subscribe(() => {
+      this.toDoItems.map((item) => (item.id === data.id ? data : item));
+      console.log('save', this.toDoItems);
+    });
   }
 
   deleteFromApp(data: Item) {
     this.http
       .delete('http://localhost:1234/delete', { body: data })
-      .subscribe((response: any) => {
-        this.toDoItems = response;
-        console.log('delete', response);
+      .subscribe(() => {
+        this.toDoItems.filter((item) => item.id !== data.id);
+        console.log('delete', this.toDoItems);
       });
+    this.http.get('http://localhost:1234/list').subscribe((response: any) => {
+      console.log('data retrieved for display');
+      this.toDoItems = response;
+    });
   }
 }

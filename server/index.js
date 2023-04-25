@@ -63,9 +63,13 @@ app.put('/edit', (req, res) => {
 
 app.delete('/delete', (req, res) => {
   const item = req.body;
-  data.splice(index, 1);
-
-  res.json(data);
+  const sql = 'DELETE FROM todoapp.todoitems WHERE id = ?';
+  db.query(sql, [item.id], (err, data) => {
+    if(err) {
+      throw err;
+    } 
+    res.json(data);
+  })
 });
 
 // Error handlers

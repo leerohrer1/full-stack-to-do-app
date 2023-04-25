@@ -5,6 +5,7 @@
         color="primary"
         [checked]="item.done"
         formControlName="doneControl"
+        (change)="saveToDoItem(itemFormGroup.value)"
       ></mat-checkbox>
 
       <mat-form-field>
